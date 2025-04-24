@@ -21,6 +21,7 @@ export interface BlotConstructor {
 }
 
 /**
+ * Blot 结构
  * Blots are the basic building blocks of a Parchment document.
  *
  * Several basic implementations such as Block, Inline, and Embed are provided.
@@ -63,6 +64,13 @@ export interface Blot extends LinkedNode {
   wrap(wrapper: Parent): Parent;
 
   deleteAt(index: number, length: number): void;
+  /**
+   * blot格式化
+   * @param index 
+   * @param length 
+   * @param name 
+   * @param value 
+   */
   formatAt(index: number, length: number, name: string, value: any): void;
   insertAt(index: number, value: string, def?: any): void;
 
@@ -75,6 +83,7 @@ export interface Blot extends LinkedNode {
   optimize(mutations: MutationRecord[], context: { [key: string]: any }): void;
 
   /**
+   * 当 blot 变化时，触发 update
    * Called when blot changes, with the mutation records of its change.
    * Internal records of the blot values can be updated, and modifications of
    * the blot itself is permitted. Can be trigger from user change or API call.
