@@ -32,6 +32,7 @@ class ScrollBlot extends ParentBlot implements Root {
     super(null, node);
     this.scroll = this;
     this.build();
+    // 核心是这里的观察者，观察dom的变化，然后调用子类的update方法（子类会调用super.update）
     this.observer = new MutationObserver((mutations: MutationRecord[]) => {
       this.update(mutations);
     });
