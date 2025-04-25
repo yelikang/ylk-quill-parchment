@@ -255,6 +255,7 @@ class ParentBlot extends ShadowBlot implements Parent {
     if (this.uiNode != null && this.uiNode !== this.domNode.firstChild) {
       this.domNode.insertBefore(this.uiNode, this.domNode.firstChild);
     }
+    // 如果children为空，并且当前blot的静态属性defaultChild不为空，则创建一个defaultChild类型的blot，并插入到children中
     if (this.children.length === 0) {
       if (this.statics.defaultChild != null) {
         const child = this.scroll.create(this.statics.defaultChild.blotName);

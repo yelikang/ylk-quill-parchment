@@ -17,6 +17,7 @@ const MAX_OPTIMIZE_ITERATIONS = 100;
 
 class ScrollBlot extends ParentBlot implements Root {
   public static blotName = 'scroll';
+  // 默认子节点
   public static defaultChild = BlockBlot;
   public static allowedChildren: BlotConstructor[] = [BlockBlot, ContainerBlot];
   public static scope = Scope.BLOCK_BLOT;
