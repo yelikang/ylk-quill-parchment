@@ -118,11 +118,17 @@ class LinkedList<T extends LinkedNode> {
     this.length -= 1;
   }
 
+  /**
+   * 迭代器，迭代方法；默认返回head
+   * @param curNode 
+   * @returns 
+   */
   public iterator(curNode: T | null = this.head): () => T | null {
     // TODO use yield when we can
     return (): T | null => {
       const ret = curNode;
       if (curNode != null) {
+        // 返回当前节点的next节点
         curNode = curNode.next as T;
       }
       return ret;
