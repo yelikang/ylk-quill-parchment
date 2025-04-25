@@ -196,6 +196,7 @@ class ScrollBlot extends ParentBlot implements Root {
         if (blot == null) {
           return null;
         }
+        // 处理target相同的mutation，合并到mutationsMap中
         if (mutationsMap.has(blot.domNode)) {
           mutationsMap.get(blot.domNode).push(mutation);
           return null;
@@ -205,6 +206,7 @@ class ScrollBlot extends ParentBlot implements Root {
         }
       })
       .forEach((blot: Blot | null) => {
+        // 上一步处理相同target，合并到mutationsMap中；return null，所以这里只处理非null的blot
         if (blot != null && blot !== this && mutationsMap.has(blot.domNode)) {
           blot.update(mutationsMap.get(blot.domNode) || [], context);
         }
