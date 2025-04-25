@@ -186,10 +186,12 @@ class ScrollBlot extends ParentBlot implements Root {
     mutations?: MutationRecord[],
     context: { [key: string]: any } = {},
   ): void {
+    // quill中的scroll调用super.update，到这里；循环处理mutations突变
     mutations = mutations || this.observer.takeRecords();
     const mutationsMap = new WeakMap();
     mutations
       .map((mutation: MutationRecord) => {
+        // 查找每个变化元素的blot
         const blot = this.find(mutation.target, true);
         if (blot == null) {
           return null;
