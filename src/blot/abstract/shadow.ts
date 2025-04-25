@@ -16,6 +16,11 @@ class ShadowBlot implements Blot {
   public static scope: Scope;
   public static tagName: string | string[];
 
+  /**
+   * blot创建domNode（根据blot静态属性的tagName创建对应的dom元素）
+   * @param rawValue 
+   * @returns 
+   */
   public static create(rawValue?: unknown): Node {
     if (this.tagName == null) {
       throw new ParchmentError('Blot definition missing tagName');
@@ -87,6 +92,15 @@ class ShadowBlot implements Blot {
     blot.remove();
   }
 
+  /**
+   * 格式化：
+   * 会根据index和length格式化一个范围，源码看的话，会找index和length之间的blot。 给这个blot做一个wrap操作。
+   * 如果没有Parent的会根据name和value生成的blot，进行insertBefore向前插入。如果有parent就进行了appendChild操作
+   * @param index 
+   * @param length 
+   * @param name 
+   * @param value 
+   */
   public formatAt(
     index: number,
     length: number,
@@ -133,6 +147,11 @@ class ShadowBlot implements Blot {
     return this.parent.children.offset(this) + this.parent.offset(root);
   }
 
+  /**
+   * 优化：
+   * 如果blot的requiredContainer为true，则需要进行wrap操作（是一个ContainerBlot）
+   * @param _context 
+   */
   public optimize(_context?: { [key: string]: any }): void {
     if (
       this.statics.requiredContainer &&
