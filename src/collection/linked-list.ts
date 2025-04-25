@@ -1,5 +1,10 @@
 import type LinkedNode from './linked-node.js';
 
+
+/**
+ * 链表
+ * 1. 不用记录每个LinkedNode,使用head、tail，并通过每个LinkedNode的next、prev进行关联实现所有Node的记录
+ */
 class LinkedList<T extends LinkedNode> {
   public head: T | null;
   public tail: T | null;
