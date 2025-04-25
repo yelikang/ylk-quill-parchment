@@ -46,12 +46,20 @@ export default class Registry implements RegistryInterface {
   private tags: { [key: string]: BlotConstructor } = {};
   private types: { [key: string]: RegistryDefinition } = {};
 
+  /**
+   * 创建blot,从types、attributes...中查找blot构造函数，并将<domNode, blot>存储到blots中
+   * @param scroll 
+   * @param input 
+   * @param value 
+   * @returns 
+   */
   public create(scroll: Root, input: Node | string | Scope, value?: any): Blot {
     const match = this.query(input);
     if (match == null) {
       throw new ParchmentError(`Unable to create ${input} blot`);
     }
     const blotClass = match as BlotConstructor;
+    // 判断传进来的input是否是Node类型，如果是，则直接使用input，否则调用blot构造函数静态方法的create方法创建blot
     const node =
       // @ts-expect-error Fix me later
       input instanceof Node || input.nodeType === Node.TEXT_NODE
