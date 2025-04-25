@@ -56,6 +56,7 @@ class ShadowBlot implements Blot {
   get statics(): any {
     return this.constructor;
   }
+  // 接收scroll、domNode元素
   constructor(
     public scroll: Root,
     public domNode: Node,

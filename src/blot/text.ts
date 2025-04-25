@@ -5,7 +5,7 @@ import LeafBlot from './abstract/leaf.js';
 class TextBlot extends LeafBlot implements Leaf {
   public static readonly blotName = 'text';
   public static scope = Scope.INLINE_BLOT;
-
+  // 创建一个对应的 DOM node
   public static create(value: string): Text {
     return document.createTextNode(value);
   }
@@ -43,6 +43,11 @@ class TextBlot extends LeafBlot implements Leaf {
     }
   }
 
+  /**
+   * 对于叶子节点，代表 blot 的 value() 返回值；
+   * 对于父容器节点，代表子节点的 values 总和。
+   * @returns 
+   */
   public length(): number {
     return this.text.length;
   }
@@ -77,6 +82,11 @@ class TextBlot extends LeafBlot implements Leaf {
     return after;
   }
 
+  /**
+   * blot更新时，触发update
+   * @param mutations 
+   * @param _context 
+   */
   public update(
     mutations: MutationRecord[],
     _context: { [key: string]: any },
@@ -88,6 +98,7 @@ class TextBlot extends LeafBlot implements Leaf {
         );
       })
     ) {
+      // TextBlot进行更新时，只获取domNode的文本内容赋值给text即可
       this.text = this.statics.value(this.domNode);
     }
   }
