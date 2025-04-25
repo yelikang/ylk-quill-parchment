@@ -67,6 +67,7 @@ class ParentBlot extends ShadowBlot implements Parent {
   }
 
   /**
+   * 构建children的LinkedList
    * Called during construction, should fill its own children LinkedList.
    */
   public build(): void {
