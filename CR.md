@@ -2,14 +2,14 @@
 ```mermaid
 graph BT
     T[Blot interface]
-    A[ShadowBlot] -->|implements| T
-     B[ParentBlot] -->|extends| A
-     C1[ScrollBlot] -->|extends| B
-     C2[ContainerBlot] -->|extends| B
+    A[ShadowBlot：实现了大部分共用属性和方法] -->|implements| T
+     B[ParentBlot：能对子元素进行增、删、改、移动、查找] -->|extends| A
+     C1[ScrollBlot：根节点，赋值到每个blot的scroll属性] -->|extends| B
+     C2[ContainerBlot：可以包裹其它节点] -->|extends| B
      C3[InlineBlot 内联墨渍] -->|extends| B
      C4[BlockBlot 块级墨渍] -->|extends| B
 
-     D[LeafBlot] -->|extends| A
+     D[LeafBlot：都属于原子节点,没有对child操作的方法] -->|extends| A
      E1[text] -->|extends| D
      E2[embed] -->|extends| D
    
@@ -24,7 +24,7 @@ graph TD
     T[AttributorStore 包含多个attributor]
 ```
 
-# 声明周期
+# 生命周期
 ```mermaid
 graph TD
     A[调用Blot.create静态函数，创建domNode] --> B[调用Blot构造函数，创建blot实例]
@@ -42,3 +42,7 @@ class Registry {
 }
 
 ```
+
+
+# 参考文档
+<a href="https://zhuanlan.zhihu.com/p/278041642" target="_blank">深入浅出quill</a>

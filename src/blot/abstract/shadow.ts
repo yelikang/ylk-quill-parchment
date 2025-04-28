@@ -139,7 +139,11 @@ class ShadowBlot implements Blot {
   public length(): number {
     return 1;
   }
-
+  /**
+   * 获取blot的偏移量(blot的offset是blot的offset + parent的offset ？)
+   * @param root 
+   * @returns 
+   */
   public offset(root: Blot = this.parent): number {
     if (this.parent == null || this === root) {
       return 0;

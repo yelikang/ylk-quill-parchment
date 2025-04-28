@@ -333,10 +333,16 @@ class ParentBlot extends ShadowBlot implements Parent {
     this.remove();
   }
 
+  /**
+   * 处理每次mutation突变
+   * @param mutations 
+   * @param _context 
+   */
   public update(
     mutations: MutationRecord[],
     _context: { [key: string]: any },
   ): void {
+    // 哪些节点被添加，哪些节点被移除
     const addedNodes: Node[] = [];
     const removedNodes: Node[] = [];
     mutations.forEach((mutation) => {
@@ -349,6 +355,11 @@ class ParentBlot extends ShadowBlot implements Parent {
       // Check node has actually been removed
       // One exception is Chrome does not immediately remove IFRAMEs
       // from DOM but MutationRecord is correct in its reported removal
+
+      // 判断node是否被移除（一般通过MutationObserver获取到的MutationRecord, removeNodes元素的parentNode为null）
+      // 一个例外是Chrome不会立即删除IFRAME
+      // 从DOM，但突变记录在报告的去除时是正确的
+
       if (
         node.parentNode != null &&
         // @ts-expect-error Fix me later
@@ -366,6 +377,7 @@ class ParentBlot extends ShadowBlot implements Parent {
         blot.domNode.parentNode == null ||
         blot.domNode.parentNode === this.domNode
       ) {
+        // 找到对应的blot，进行detach(在shadow中)；移除parent blot子元素的blot；移除Registry.blots中的domNode（实际的dom node已经被浏览器默认事件删除）
         blot.detach();
       }
     });
@@ -392,6 +404,7 @@ class ParentBlot extends ShadowBlot implements Parent {
           if (blot.parent != null) {
             blot.parent.removeChild(this);
           }
+          // 插入blot
           this.insertBefore(blot, refBlot || undefined);
         }
       });
