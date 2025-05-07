@@ -12,6 +12,10 @@ graph BT
      D[LeafBlot：都属于原子节点,没有对child操作的方法] -->|extends| A
      E1[text] -->|extends| D
      E2[embed] -->|extends| D
+
+     F1[Break] -->|extends| E2
+     
+     F2[Block] -->|extends| C4
    
 ```
 

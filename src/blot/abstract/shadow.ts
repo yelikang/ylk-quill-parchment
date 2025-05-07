@@ -148,6 +148,7 @@ class ShadowBlot implements Blot {
     if (this.parent == null || this === root) {
       return 0;
     }
+    // 子节点的offset长度  + 父节点的offset长度 （ep: ）
     return this.parent.children.offset(this) + this.parent.offset(root);
   }
 
